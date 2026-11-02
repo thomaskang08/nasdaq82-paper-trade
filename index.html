@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NASDAQ-82 Paper Trade</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg:#fbfaf8; --panel:#fff; --fg:#1d1c1a; --muted:#6b6862;
+    --line:#e3e0d9; --accent:#2a6f5e; --down:#b4442e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#16171a; --panel:#1d1f23; --fg:#e9e7e2; --muted:#9b978f;
+            --line:#2d3036; --accent:#5fae99; --down:#e07a5f; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:15px/1.65 ui-sans-serif,-apple-system,"Helvetica Neue",sans-serif;
+         font-variant-numeric:tabular-nums; }
+  main { max-width:900px; margin:0 auto; padding:40px max(16px,4vw) 64px; }
+  h1 { font-size:1.6rem; margin:0 0 4px; letter-spacing:-0.02em; text-wrap:balance; }
+  h2 { font-size:0.78rem; text-transform:uppercase; letter-spacing:0.09em;
+       color:var(--muted); margin:38px 0 10px; font-weight:600; }
+  h3 { font-size:1rem; margin:26px 0 8px; }
+  p { margin:0 0 10px; max-width:66ch; }
+  em { color:var(--muted); font-style:normal; font-size:0.85rem; }
+  code { font-family:ui-monospace,Menlo,monospace; font-size:0.88em;
+         background:var(--panel); border:1px solid var(--line);
+         border-radius:3px; padding:1px 5px; }
+  blockquote { margin:14px 0; padding:10px 14px; border-left:3px solid var(--accent);
+               background:var(--panel); color:var(--muted); font-size:0.9rem; }
+  hr { border:0; border-top:1px solid var(--line); margin:34px 0 18px; }
+  .scroll { overflow-x:auto; margin:0 0 14px; }
+  table { border-collapse:collapse; width:100%; font-size:0.88rem;
+          background:var(--panel); border:1px solid var(--line); border-radius:6px; }
+  th { text-align:right; font-size:0.68rem; text-transform:uppercase;
+       letter-spacing:0.06em; color:var(--muted); font-weight:600;
+       padding:9px 12px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  td { text-align:right; padding:8px 12px; border-bottom:1px solid var(--line); }
+  th:first-child, td:first-child { text-align:left; }
+  th:nth-child(2), td:nth-child(2) { text-align:left; }
+  tbody tr:last-child td { border-bottom:none; }
+  td:first-child { font-weight:600; }
+</style></head><body><main>
+<h1>NASDAQ-82 Paper Trade</h1>
+<p><em>Updated Sunday 01 November 2026 at 10:26 PM Pacific</em></p>
+<h2>Portfolio</h2>
+<p><em>What the strategy&#x27;s own accounting says, including costs and limits.</em></p>
+<div class="scroll"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>Value</td><td><strong>$100,000.00</strong></td></tr>
+<tr><td>Change since start</td><td>+0.00%</td></tr>
+<tr><td>Cash</td><td>$100,000.00</td></tr>
+<tr><td>Started</td><td>$100,000.00 on 2026-11-02</td></tr>
+</tbody></table></div>
+<blockquote>t; No holdings yet. The first orders fill at the next opening auction; every position, the running value and the cost of trading appear here from that day on.</blockquote>
+<h2>Next session&#x27;s orders</h2>
+<div class="scroll"><table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td>Signals from</td><td>2026-10-30 close</td></tr>
+<tr><td>Fills at</td><td>the next session&#x27;s opening auction</td></tr>
+<tr><td>Orders</td><td><strong>15 buy / 13 sell</strong></td></tr>
+<tr><td>Before the strength filter</td><td>20 buy / 35 sell</td></tr>
+<tr><td>Removed by the filter</td><td>27</td></tr>
+<tr><td>Decided at</td><td>2026-10-31T19:20:03+00:00 UTC</td></tr>
+<tr><td>Snapshot hash</td><td><code>00a0c9747d9846ff</code></td></tr>
+</tbody></table></div>
+<p>Gap is how far the forecast sits from the price. Strength is the weaker of the open and close gaps: a buy needs 10%, a sell 20%.</p>
+<div class="scroll"><table><thead><tr><th>Ticker</th><th>Order</th><th>Open</th><th>Gap (open)</th><th>Gap (close)</th><th>Strength</th></tr></thead><tbody>
+<tr><td>PYPL</td><td>Sell</td><td>$56.92</td><td>-58.8%</td><td>-58.6%</td><td>58.6%</td></tr>
+<tr><td>DOCU</td><td>Sell</td><td>$82.07</td><td>-57.0%</td><td>-56.9%</td><td>56.9%</td></tr>
+<tr><td>OKTA</td><td>Sell</td><td>$218.99</td><td>-56.3%</td><td>-53.9%</td><td>53.9%</td></tr>
+<tr><td>CHTR</td><td>Buy</td><td>$110.57</td><td>+53.6%</td><td>+51.9%</td><td>51.9%</td></tr>
+<tr><td>ALGN</td><td>Sell</td><td>$153.98</td><td>-45.5%</td><td>-44.1%</td><td>44.1%</td></tr>
+<tr><td>BIIB</td><td>Sell</td><td>$255.39</td><td>-43.8%</td><td>-43.4%</td><td>43.4%</td></tr>
+<tr><td>NFLX</td><td>Buy</td><td>$62.66</td><td>+36.7%</td><td>+37.9%</td><td>36.7%</td></tr>
+<tr><td>SIRI</td><td>Sell</td><td>$28.50</td><td>-34.5%</td><td>-35.7%</td><td>34.5%</td></tr>
+<tr><td>INTU</td><td>Buy</td><td>$339.77</td><td>+34.5%</td><td>+34.0%</td><td>34.0%</td></tr>
+<tr><td>MU</td><td>Sell</td><td>$884.00</td><td>-33.7%</td><td>-33.8%</td><td>33.7%</td></tr>
+<tr><td>CPRT</td><td>Buy</td><td>$30.08</td><td>+33.2%</td><td>+32.8%</td><td>32.8%</td></tr>
+<tr><td>TEAM</td><td>Sell</td><td>$202.50</td><td>-34.9%</td><td>-31.0%</td><td>31.0%</td></tr>
+<tr><td>PDD</td><td>Buy</td><td>$80.00</td><td>+27.5%</td><td>+29.7%</td><td>27.5%</td></tr>
+<tr><td>CRWD</td><td>Sell</td><td>$261.06</td><td>-29.7%</td><td>-26.6%</td><td>26.6%</td></tr>
+<tr><td>AMD</td><td>Sell</td><td>$508.53</td><td>-26.6%</td><td>-26.0%</td><td>26.0%</td></tr>
+<tr><td>TMUS</td><td>Buy</td><td>$150.00</td><td>+30.9%</td><td>+25.6%</td><td>25.6%</td></tr>
+<tr><td>PCAR</td><td>Buy</td><td>$102.72</td><td>+23.5%</td><td>+24.4%</td><td>23.5%</td></tr>
+<tr><td>PANW</td><td>Sell</td><td>$383.39</td><td>-26.7%</td><td>-22.9%</td><td>22.9%</td></tr>
+<tr><td>MELI</td><td>Buy</td><td>$1,639.51</td><td>+22.8%</td><td>+24.0%</td><td>22.8%</td></tr>
+<tr><td>SWKS</td><td>Sell</td><td>$87.73</td><td>-23.0%</td><td>-22.7%</td><td>22.7%</td></tr>
+<tr><td>AMGN</td><td>Sell</td><td>$470.15</td><td>-22.3%</td><td>-21.6%</td><td>21.6%</td></tr>
+<tr><td>ODFL</td><td>Buy</td><td>$173.50</td><td>+20.0%</td><td>+20.6%</td><td>20.0%</td></tr>
+<tr><td>GOOG</td><td>Buy</td><td>$279.69</td><td>+18.5%</td><td>+19.1%</td><td>18.5%</td></tr>
+<tr><td>GOOGL</td><td>Buy</td><td>$281.12</td><td>+18.1%</td><td>+18.7%</td><td>18.1%</td></tr>
+<tr><td>ORLY</td><td>Buy</td><td>$89.30</td><td>+13.4%</td><td>+14.9%</td><td>13.4%</td></tr>
+<tr><td>TTWO</td><td>Buy</td><td>$192.10</td><td>+11.4%</td><td>+12.4%</td><td>11.4%</td></tr>
+<tr><td>AVGO</td><td>Buy</td><td>$330.72</td><td>+10.6%</td><td>+12.0%</td><td>10.6%</td></tr>
+<tr><td>JD</td><td>Buy</td><td>$25.73</td><td>+10.1%</td><td>+10.4%</td><td>10.1%</td></tr>
+</tbody></table></div>
+<hr>
+<p>Simulated money, Interactive Brokers paper account. Signals are fixed and hashed before the opening price they trade at exists, so no future information can reach them.</p>
+</main></body></html>
