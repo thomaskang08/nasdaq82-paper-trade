@@ -99,24 +99,54 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 <div class="hd"><h1>NASDAQ-82 Paper Trade</h1>
-<p class="sub">Updated Monday 02 November 2026 at 6:05 AM Pacific</p>
-<p class="stage wait">Orders are in with the broker and fill at the next opening auction.</p>
+<p class="sub">Updated Monday 02 November 2026 at 6:40 AM Pacific</p>
+<p class="stage done">Today's orders filled at the opening auction. Positions below are what the broker holds now.</p>
 </div>
 <section><h2>Account value</h2>
 <div class="chart"><div class="empty">No sessions yet. The curve starts after the first orders fill at tomorrow's open.</div></div></section>
 <section><h2>The account</h2>
 <div class="card lead">
-<p class="big">$100,000.00</p>
-<p class="src">Nothing has been bought or sold yet, so this is the starting balance. Once the first orders fill, the figure here comes from Interactive Brokers.</p>
+<p class="big">$99,687.82</p>
+<p class="src">At Interactive Brokers, as of 2026-11-02. Started at $100,000.</p>
+<p class="recon ok">Our own tally comes to $100,000.00, $312.18 apart. Small differences are normal: the broker prices each holding as it trades now, we price it at the last opening price.</p>
 <dl class="wide">
-<dt>Cash</dt><dd>$100,000.00</dd>
-<dt>Shares held</dt><dd>0 names</dd>
+<dt>Cash</dt><dd>$91,142.97</dd>
+<dt>Shares held</dt><dd>25 names</dd>
 <dt>Change since the start</dt><dd class="up">+0.00%</dd>
+<dt>Trades filled</dt><dd>25</dd>
 </dl></div></section>
-<section><h2>Shares held <span class="n">none yet</span></h2>
-<div class="block"><div class="empty">The first orders fill at the next opening auction. Every position appears here from that day on.</div></div>
+<section><h2>Shares held at the broker <span class="n">25 names, 14 long / 11 short</span></h2>
+<div class="block">
+<p class="note">Reported by Interactive Brokers, marked at its own prices. Each position is capped at 3% of the account when it is opened; a name with no current signal is held rather than sold, so the list grows over time.</p>
+<div class="scroll"><table><thead><tr><th>Ticker</th><th>Side</th><th>Shares</th><th>Price</th><th>Value</th><th>% of book</th><th>Unrealised</th></tr></thead><tbody>
+<tr><td>TMUS</td><td class="buy">Long</td><td>20</td><td>$154.00</td><td>$3,080.00</td><td>3.09%</td><td class="sell">-$1.00</td></tr>
+<tr><td>SIRI</td><td class="sell">Short</td><td>105</td><td>$29.27</td><td>$3,072.93</td><td>3.08%</td><td class="sell">-$28.99</td></tr>
+<tr><td>CHTR</td><td class="buy">Long</td><td>27</td><td>$112.50</td><td>$3,037.54</td><td>3.05%</td><td class="sell">-$14.46</td></tr>
+<tr><td>JD</td><td class="buy">Long</td><td>116</td><td>$26.10</td><td>$3,027.60</td><td>3.04%</td><td class="sell">-$1.00</td></tr>
+<tr><td>CPRT</td><td class="buy">Long</td><td>99</td><td>$30.40</td><td>$3,009.60</td><td>3.02%</td><td class="sell">-$1.00</td></tr>
+<tr><td>SWKS</td><td class="sell">Short</td><td>34</td><td>$88.50</td><td>$3,009.16</td><td>3.02%</td><td class="sell">-$52.22</td></tr>
+<tr><td>PCAR</td><td class="buy">Long</td><td>29</td><td>$103.25</td><td>$2,994.26</td><td>3.00%</td><td class="sell">-$51.74</td></tr>
+<tr><td>PYPL</td><td class="sell">Short</td><td>52</td><td>$57.48</td><td>$2,988.93</td><td>3.00%</td><td class="sell">-$15.59</td></tr>
+<tr><td>ORLY</td><td class="buy">Long</td><td>33</td><td>$90.56</td><td>$2,988.48</td><td>3.00%</td><td class="sell">-$1.00</td></tr>
+<tr><td>PDD</td><td class="buy">Long</td><td>37</td><td>$80.44</td><td>$2,976.28</td><td>2.99%</td><td class="sell">-$3.22</td></tr>
+<tr><td>DOCU</td><td class="sell">Short</td><td>36</td><td>$82.09</td><td>$2,955.24</td><td>2.96%</td><td class="sell">-$7.90</td></tr>
+<tr><td>AVGO</td><td class="buy">Long</td><td>9</td><td>$328.27</td><td>$2,954.43</td><td>2.96%</td><td class="sell">-$10.81</td></tr>
+<tr><td>NFLX</td><td class="buy">Long</td><td>47</td><td>$62.25</td><td>$2,925.75</td><td>2.93%</td><td class="sell">-$1.00</td></tr>
+<tr><td>ALGN</td><td class="sell">Short</td><td>19</td><td>$153.00</td><td>$2,906.99</td><td>2.92%</td><td class="sell">-$99.84</td></tr>
+<tr><td>TTWO</td><td class="buy">Long</td><td>15</td><td>$192.50</td><td>$2,887.50</td><td>2.90%</td><td class="sell">-$8.50</td></tr>
+<tr><td>GOOGL</td><td class="buy">Long</td><td>10</td><td>$283.59</td><td>$2,835.90</td><td>2.84%</td><td class="buy">+$0.90</td></tr>
+<tr><td>GOOG</td><td class="buy">Long</td><td>10</td><td>$281.64</td><td>$2,816.40</td><td>2.83%</td><td class="buy">+$0.90</td></tr>
+<tr><td>CRWD</td><td class="sell">Short</td><td>11</td><td>$255.22</td><td>$2,807.42</td><td>2.82%</td><td class="buy">+$20.72</td></tr>
+<tr><td>AMGN</td><td class="sell">Short</td><td>6</td><td>$465.73</td><td>$2,794.40</td><td>2.80%</td><td class="sell">-$14.46</td></tr>
+<tr><td>BIIB</td><td class="sell">Short</td><td>11</td><td>$252.94</td><td>$2,782.30</td><td>2.79%</td><td class="sell">-$33.36</td></tr>
+<tr><td>INTU</td><td class="buy">Long</td><td>8</td><td>$343.00</td><td>$2,744.00</td><td>2.75%</td><td class="buy">+$15.40</td></tr>
+<tr><td>OKTA</td><td class="sell">Short</td><td>13</td><td>$208.00</td><td>$2,704.00</td><td>2.71%</td><td class="sell">-$1.06</td></tr>
+<tr><td>MU</td><td class="sell">Short</td><td>3</td><td>$895.84</td><td>$2,687.52</td><td>2.70%</td><td class="sell">-$4.36</td></tr>
+<tr><td>TEAM</td><td class="sell">Short</td><td>14</td><td>$191.00</td><td>$2,674.00</td><td>2.68%</td><td class="sell">-$1.06</td></tr>
+<tr><td>MELI</td><td class="buy">Long</td><td>1</td><td>$1,650.00</td><td>$1,650.00</td><td>1.66%</td><td class="buy">+$2.46</td></tr>
+</tbody></table></div></div>
 </section>
-<section><h2>Orders submitted, awaiting the open <span class="n">15 buy / 13 sell</span></h2>
+<section><h2>Orders filled at today's open <span class="n">15 buy / 13 sell</span></h2>
 <div class="block">
 <p class="note">Click any row to see that name's price chart. Decided from the 2026-10-30 close and filled at the next opening auction. Both forecast models agreed on 55 names; the strength filter removed 27. Strength is the weaker of the two gaps, and must clear 10% to buy or 20% to sell. The decision was hashed (<code>00a0c9747d9846ff</code>) before the opening price existed.</p>
 <div class="scroll"><table><thead><tr><th>Ticker</th><th>Order</th><th>Open</th><th>Gap at open</th><th>Gap at close</th><th>Strength</th></tr></thead><tbody>
