@@ -56,10 +56,30 @@ dl.wide dd.up{color:var(--up)}dl.wide dd.dn{color:var(--down)}
 .block{background:var(--panel);border:1px solid var(--line);border-radius:8px;
  padding:16px 18px;margin-top:10px}
 .block .note{margin:0 0 14px}
-.block .scroll{margin:0}
-.block table{margin:0}
 .block .empty{padding:20px 4px}
 h2{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+dd{margin:0;text-align:right}
+.chg.n{color:var(--down)}
+.note{font-size:0.8rem;color:var(--muted);margin:0 0 12px;max-width:66ch;
+ line-height:1.6}
+.scroll{overflow-x:auto;margin:0}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:0.86rem;
+ min-width:430px;margin:0}
+th{text-align:right;font-size:0.68rem;text-transform:uppercase;
+ letter-spacing:0.06em;color:var(--muted);font-weight:600;padding:9px 12px;
+ border-bottom:1px solid var(--line);white-space:nowrap;
+ background:var(--panel);position:sticky;top:0}
+td{text-align:right;padding:10px 12px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+td:first-child{font-weight:600}
+tbody tr:last-child td{border-bottom:none}
+.buy{color:var(--up)}
+.sell{color:var(--down)}
+.empty{padding:26px 4px;text-align:center;color:var(--muted);font-size:0.86rem}
+footer{border-top:1px solid var(--line);padding-top:16px;font-size:0.78rem;
+ line-height:1.65;color:var(--muted);max-width:70ch;margin-top:34px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:0.88em;
+ background:var(--grid);border-radius:3px;padding:1px 5px}
 tr.row-chart{cursor:pointer}
 tr.row-chart:hover td{background:var(--grid)}
 tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
@@ -79,7 +99,7 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 <div class="hd"><h1>NASDAQ-82 Paper Trade</h1>
-<p class="sub">Updated Sunday 01 November 2026 at 10:45 PM Pacific</p>
+<p class="sub">Updated Sunday 01 November 2026 at 10:47 PM Pacific</p>
 </div>
 <section><h2>Account value</h2>
 <div class="chart"><div class="empty">No sessions yet. The curve starts after the first orders fill at tomorrow's open.</div></div></section>
