@@ -1,0 +1,234 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NASDAQ-82 Trade Detail</title>
+<style>
+:root{color-scheme:light dark;
+ --bg:#fbfaf8;--panel:#fff;--fg:#1d1c1a;--muted:#6f6b64;--line:#e4e1da;
+ --grid:#efece5;--ours:#2a6f5e;--broker:#b4661f;--up:#2a6f5e;--down:#b4442e}
+@media (prefers-color-scheme:dark){:root{
+ --bg:#15161a;--panel:#1c1e23;--fg:#e9e7e2;--muted:#9a968e;--line:#2c2f35;
+ --grid:#23262b;--ours:#5fae99;--broker:#d9954f;--up:#5fae99;--down:#e07a5f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+ font:15px/1.6 ui-sans-serif,-apple-system,"Helvetica Neue",sans-serif;
+ font-variant-numeric:tabular-nums}
+main{max-width:980px;margin:0 auto;padding:36px max(16px,4vw) 72px}
+.hd{display:flex;flex-direction:column;gap:3px;margin-bottom:26px}
+h1{font-size:1.45rem;margin:0;letter-spacing:-0.02em;text-wrap:balance}
+.sub{font-size:0.8rem;color:var(--muted)}
+.navlink{color:var(--muted);text-decoration:none;
+ border-bottom:1px solid var(--line)}
+.navlink:hover{color:var(--fg)}
+.stage{font-size:0.82rem;margin:8px 0 0;padding:7px 11px;border-radius:6px;
+ display:inline-block}
+.stage.wait{background:var(--grid);color:var(--muted)}
+.stage.done{background:var(--grid);color:var(--up);font-weight:500}
+h2{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.09em;
+ color:var(--muted);margin:0 0 10px;font-weight:600}
+section{margin-bottom:34px}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+ padding:16px 14px 10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 0;
+ font-size:0.76rem;color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:2px;vertical-align:middle;
+ margin-right:6px}
+.cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+ padding:16px 18px}
+.card h3{margin:0 0 2px;font-size:0.9rem}
+.card .src{margin:0 0 12px;font-size:0.74rem;color:var(--muted)}
+.big{font-family:ui-serif,Georgia,serif;font-size:1.9rem;line-height:1.05;
+ margin:0 0 2px}
+.chg{font-size:0.82rem;margin:0 0 14px}
+.chg.p{color:var(--up)}.chg.n{color:var(--down)}
+dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:5px 14px;
+ font-size:0.84rem}
+dt{color:var(--muted)}dd{margin:0;text-align:right}
+h2 .n{font-weight:400;text-transform:none;letter-spacing:0;
+ color:var(--muted);font-size:0.76rem}
+.card.lead .big{font-size:2.6rem;margin-bottom:4px}
+.card.lead .src{font-size:0.82rem;margin-bottom:12px;max-width:60ch}
+.recon{font-size:0.8rem;margin:0 0 14px;padding:7px 11px;border-radius:6px;
+ display:inline-block;max-width:60ch}
+.recon.ok{background:var(--grid);color:var(--muted)}
+.recon.off{background:var(--grid);color:var(--down)}
+dl.wide{grid-template-columns:1fr auto;gap:7px 20px;font-size:0.86rem;
+ padding-top:12px;border-top:1px solid var(--line)}
+dl.wide dd.up{color:var(--up)}dl.wide dd.dn{color:var(--down)}
+.block{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+ padding:16px 18px;margin-top:10px}
+.block .note{margin:0 0 14px}
+.block .empty{padding:20px 4px}
+h2{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+dd{margin:0;text-align:right}
+.chg.n{color:var(--down)}
+.note{font-size:0.8rem;color:var(--muted);margin:0 0 12px;max-width:66ch;
+ line-height:1.6}
+.scroll{overflow-x:auto;margin:0}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:0.86rem;
+ min-width:430px;margin:0}
+th{text-align:right;font-size:0.68rem;text-transform:uppercase;
+ letter-spacing:0.06em;color:var(--muted);font-weight:600;padding:9px 12px;
+ border-bottom:1px solid var(--line);white-space:nowrap;
+ background:var(--panel);position:sticky;top:0}
+td{text-align:right;padding:10px 12px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+td:first-child{font-weight:600}
+tbody tr:last-child td{border-bottom:none}
+.buy{color:var(--up)}
+.sell{color:var(--down)}
+.empty{padding:26px 4px;text-align:center;color:var(--muted);font-size:0.86rem}
+footer{border-top:1px solid var(--line);padding-top:16px;font-size:0.78rem;
+ line-height:1.65;color:var(--muted);max-width:70ch;margin-top:34px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:0.88em;
+ background:var(--grid);border-radius:3px;padding:1px 5px}
+tr.row-chart{cursor:pointer}
+tr.row-chart:hover td{background:var(--grid)}
+tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;
+ align-items:center;justify-content:center;padding:max(16px,4vw);z-index:50}
+#ov[hidden]{display:none}
+#box{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+ padding:18px;max-width:760px;width:100%;max-height:90vh;overflow:auto}
+#ovhd{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+#ovhd h3{margin:0 0 12px;font-size:1.05rem}
+#ovx{background:none;border:1px solid var(--line);color:var(--muted);
+ border-radius:5px;padding:4px 10px;font-size:0.78rem;cursor:pointer}
+#ovx:hover{color:var(--fg)}
+#ovc svg{display:block;width:100%;height:auto}
+#ovn{margin:12px 0 0;font-size:0.78rem;color:var(--muted);line-height:1.6;
+ max-width:64ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.navlink{font-size:0.8rem;color:var(--muted);text-decoration:none;
+ border-bottom:1px solid var(--line)}
+.navlink:hover{color:var(--fg)}
+.badge{display:inline-block;font-size:0.68rem;letter-spacing:0.04em;
+ padding:2px 7px;border-radius:4px;background:var(--grid);color:var(--muted);
+ white-space:nowrap}
+.badge.in{color:var(--ours);font-weight:600}
+.badge.out{color:var(--broker);font-weight:600}
+.badge.rb{font-style:italic}
+td.lead{text-align:left;font-weight:600}
+td.what{text-align:left}
+.pl.up{color:var(--up)}.pl.dn{color:var(--down)}
+details{margin:0 0 8px;background:var(--panel);border:1px solid var(--line);
+ border-radius:8px;overflow:hidden}
+details[open]{padding-bottom:4px}
+summary{cursor:pointer;padding:12px 16px;font-size:0.86rem;
+ display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::marker{content:""}
+summary b{font-weight:600}
+summary .meta{color:var(--muted);font-size:0.78rem}
+summary:hover{background:var(--grid)}
+details .scroll{padding:0 4px 4px}
+.tot{display:grid;grid-template-columns:1fr auto;gap:6px 18px;
+ font-size:0.86rem;padding-top:12px;margin-top:4px;
+ border-top:1px solid var(--line)}
+.tot .k{color:var(--muted)}
+.tot .v{text-align:right}
+</style></head><body><main>
+<div class="hd"><h1>Trade detail</h1>
+<p class="sub">Updated Wednesday 04 November 2026 at 10:04 AM Pacific &middot; <a class="navlink" href="index.html">back to the brief</a></p>
+</div>
+<section><h2>Open positions <span class="n">28</span></h2>
+<p class="note">Cost basis and unrealised P&amp;L are Interactive Brokers’ own figures, not this program’s. Held counts the sessions since the position last left zero.</p>
+<div class="scroll"><table><thead><tr><th>Ticker</th><th>Side</th><th>Shares</th><th>Opened</th><th>Held</th><th>Avg cost</th><th>Price</th><th>Unrealised</th></tr></thead><tbody>
+<tr><td class="lead">SWKS</td><td class="what">short</td><td>-35</td><td>2026-11-02</td><td>3</td><td>$86.58</td><td>$74.69</td><td class="pl up">+416.15</td></tr>
+<tr><td class="lead">OKTA</td><td class="what">short</td><td>-16</td><td>2026-11-02</td><td>3</td><td>$204.50</td><td>$190.00</td><td class="pl up">+231.93</td></tr>
+<tr><td class="lead">MU</td><td class="what">short</td><td>-3</td><td>2026-11-02</td><td>3</td><td>$894.39</td><td>$831.00</td><td class="pl up">+190.16</td></tr>
+<tr><td class="lead">JD</td><td class="what">long</td><td>113</td><td>2026-11-02</td><td>3</td><td>$26.11</td><td>$27.79</td><td class="pl up">+190.00</td></tr>
+<tr><td class="lead">CPRT</td><td class="what">long</td><td>99</td><td>2026-11-02</td><td>3</td><td>$30.41</td><td>$32.00</td><td class="pl up">+157.40</td></tr>
+<tr><td class="lead">CRWD</td><td class="what">short</td><td>-12</td><td>2026-11-02</td><td>3</td><td>$256.01</td><td>$245.20</td><td class="pl up">+129.74</td></tr>
+<tr><td class="lead">CHTR</td><td class="what">long</td><td>26</td><td>2026-11-02</td><td>3</td><td>$113.04</td><td>$117.40</td><td class="pl up">+113.44</td></tr>
+<tr><td class="lead">NFLX</td><td class="what">long</td><td>48</td><td>2026-11-02</td><td>3</td><td>$62.29</td><td>$64.65</td><td class="pl up">+113.36</td></tr>
+<tr><td class="lead">INTU</td><td class="what">long</td><td>8</td><td>2026-11-02</td><td>3</td><td>$341.07</td><td>$355.00</td><td class="pl up">+111.40</td></tr>
+<tr><td class="lead">TTWO</td><td class="what">long</td><td>15</td><td>2026-11-02</td><td>3</td><td>$193.07</td><td>$199.78</td><td class="pl up">+100.70</td></tr>
+<tr><td class="lead">PDD</td><td class="what">long</td><td>37</td><td>2026-11-02</td><td>3</td><td>$80.53</td><td>$83.09</td><td class="pl up">+94.98</td></tr>
+<tr><td class="lead">BKNG</td><td class="what">long</td><td>19</td><td>2026-11-03</td><td>2</td><td>$158.76</td><td>$163.00</td><td class="pl up">+80.65</td></tr>
+<tr><td class="lead">TMUS</td><td class="what">long</td><td>18</td><td>2026-11-02</td><td>3</td><td>$154.05</td><td>$158.09</td><td class="pl up">+72.64</td></tr>
+<tr><td class="lead">ORLY</td><td class="what">long</td><td>33</td><td>2026-11-02</td><td>3</td><td>$90.62</td><td>$92.50</td><td class="pl up">+62.03</td></tr>
+<tr><td class="lead">MELI</td><td class="what">long</td><td>1</td><td>2026-11-02</td><td>3</td><td>$1,647.54</td><td>$1,705.00</td><td class="pl up">+57.46</td></tr>
+<tr><td class="lead">ODFL</td><td class="what">long</td><td>17</td><td>2026-11-03</td><td>2</td><td>$179.65</td><td>$180.65</td><td class="pl up">+16.98</td></tr>
+<tr><td class="lead">GOOG</td><td class="what">long</td><td>10</td><td>2026-11-02</td><td>3</td><td>$281.55</td><td>$283.14</td><td class="pl up">+15.90</td></tr>
+<tr><td class="lead">GOOGL</td><td class="what">long</td><td>10</td><td>2026-11-02</td><td>3</td><td>$283.50</td><td>$284.82</td><td class="pl up">+13.20</td></tr>
+<tr><td class="lead">DOCU</td><td class="what">short</td><td>-38</td><td>2026-11-02</td><td>3</td><td>$81.76</td><td>$82.00</td><td class="pl dn">-9.28</td></tr>
+<tr><td class="lead">AVGO</td><td class="what">long</td><td>9</td><td>2026-11-02</td><td>3</td><td>$329.47</td><td>$328.24</td><td class="pl dn">-11.08</td></tr>
+<tr><td class="lead">SNPS</td><td class="what">long</td><td>6</td><td>2026-11-03</td><td>2</td><td>$464.17</td><td>$461.21</td><td class="pl dn">-17.76</td></tr>
+<tr><td class="lead">TEAM</td><td class="what">short</td><td>-16</td><td>2026-11-02</td><td>3</td><td>$190.28</td><td>$192.00</td><td class="pl dn">-27.46</td></tr>
+<tr><td class="lead">BIIB</td><td class="what">short</td><td>-12</td><td>2026-11-02</td><td>3</td><td>$249.99</td><td>$253.57</td><td class="pl dn">-42.86</td></tr>
+<tr><td class="lead">PCAR</td><td class="what">long</td><td>29</td><td>2026-11-02</td><td>3</td><td>$105.03</td><td>$102.98</td><td class="pl dn">-59.57</td></tr>
+<tr><td class="lead">AMGN</td><td class="what">short</td><td>-6</td><td>2026-11-02</td><td>3</td><td>$463.32</td><td>$480.02</td><td class="pl dn">-100.18</td></tr>
+<tr><td class="lead">PYPL</td><td class="what">short</td><td>-51</td><td>2026-11-02</td><td>3</td><td>$57.18</td><td>$59.60</td><td class="pl dn">-123.44</td></tr>
+<tr><td class="lead">ALGN</td><td class="what">short</td><td>-19</td><td>2026-11-02</td><td>3</td><td>$147.74</td><td>$156.98</td><td class="pl dn">-175.48</td></tr>
+<tr><td class="lead">SIRI</td><td class="what">short</td><td>-100</td><td>2026-11-02</td><td>3</td><td>$28.99</td><td>$31.45</td><td class="pl dn">-246.01</td></tr>
+</tbody></table></div>
+<div class="tot"><span class="k">Unrealised, all positions</span><span class="v pl up">+1,355.00</span></div>
+</section>
+<section><h2>Closed trades <span class="n">0</span></h2>
+<div class="block"><p class="empty note">Nothing has been closed yet. Every position opened so far is still open, so there is no realised P&amp;L to report.</p></div>
+</section>
+<section><h2>Session log <span class="n">48 fills</span></h2>
+<p class="note">Every fill the broker reported, newest session first. &ldquo;rebalance&rdquo; marks a trade the signal did not ask for — the position was moved only to stay under the 3% cap.</p>
+<details open><summary><b>2026-11-04</b><span class="meta">12 fills &middot; $3,310 traded &middot; $10.32 commission</span></summary>
+<div class="scroll"><table><thead><tr><th>Ticker</th><th>What</th><th>Shares</th><th>Price</th><th>Value</th><th>Comm</th><th>Position after</th></tr></thead><tbody>
+<tr><td class="lead">BKNG</td><td class="what"><span class="badge in">add long</span></td><td>+9</td><td>$162.95</td><td>$1,466.55</td><td>1.00</td><td>+19</td></tr>
+<tr><td class="lead">OKTA</td><td class="what"><span class="badge in">add short</span></td><td>-3</td><td>$190.00</td><td>$570.00</td><td>1.01</td><td>-16</td></tr>
+<tr><td class="lead">BIIB</td><td class="what"><span class="badge in">add short</span></td><td>-1</td><td>$252.00</td><td>$252.00</td><td>1.01</td><td>-12</td></tr>
+<tr><td class="lead">CRWD</td><td class="what"><span class="badge in">add short</span></td><td>-1</td><td>$245.00</td><td>$245.00</td><td>1.01</td><td>-12</td></tr>
+<tr><td class="lead">TEAM</td><td class="what"><span class="badge in">add short</span></td><td>-1</td><td>$192.00</td><td>$192.00</td><td>1.00</td><td>-16</td></tr>
+<tr><td class="lead">TMUS</td><td class="what"><span class="badge out">trim long</span></td><td>-1</td><td>$158.20</td><td>$158.20</td><td>1.00</td><td>+18</td></tr>
+<tr><td class="lead">ORLY</td><td class="what"><span class="badge out">trim long</span></td><td>-1</td><td>$92.50</td><td>$92.50</td><td>0.93</td><td>+33</td></tr>
+<tr><td class="lead">DOCU</td><td class="what"><span class="badge in">add short</span></td><td>-1</td><td>$81.50</td><td>$81.50</td><td>0.82</td><td>-38</td></tr>
+<tr><td class="lead">SWKS</td><td class="what"><span class="badge in">add short</span></td><td>-1</td><td>$74.11</td><td>$74.11</td><td>0.75</td><td>-35</td></tr>
+<tr><td class="lead">SIRI</td><td class="what"><span class="badge out">trim short</span></td><td>+2</td><td>$31.40</td><td>$62.80</td><td>0.63</td><td>-100</td></tr>
+<tr><td class="lead">PYPL</td><td class="what"><span class="badge out">trim short</span></td><td>+1</td><td>$59.45</td><td>$59.45</td><td>0.60</td><td>-51</td></tr>
+<tr><td class="lead">JD</td><td class="what"><span class="badge rb">trim long &middot; rebalance</span></td><td>-2</td><td>$27.70</td><td>$55.40</td><td>0.56</td><td>+113</td></tr>
+</tbody></table></div></details>
+<details><summary><b>2026-11-03</b><span class="meta">11 fills &middot; $8,189 traded &middot; $9.54 commission</span></summary>
+<div class="scroll"><table><thead><tr><th>Ticker</th><th>What</th><th>Shares</th><th>Price</th><th>Value</th><th>Comm</th><th>Position after</th></tr></thead><tbody>
+<tr><td class="lead">ODFL</td><td class="what"><span class="badge in">long entry</span></td><td>+17</td><td>$179.59</td><td>$3,053.03</td><td>1.00</td><td>+17</td></tr>
+<tr><td class="lead">SNPS</td><td class="what"><span class="badge in">long entry</span></td><td>+6</td><td>$464.00</td><td>$2,784.00</td><td>1.00</td><td>+6</td></tr>
+<tr><td class="lead">BKNG</td><td class="what"><span class="badge in">long entry</span></td><td>+10</td><td>$154.78</td><td>$1,547.80</td><td>1.00</td><td>+10</td></tr>
+<tr><td class="lead">TEAM</td><td class="what"><span class="badge in">add short</span></td><td>-1</td><td>$181.60</td><td>$181.60</td><td>1.00</td><td>-15</td></tr>
+<tr><td class="lead">TMUS</td><td class="what"><span class="badge out">trim long</span></td><td>-1</td><td>$158.10</td><td>$158.10</td><td>1.00</td><td>+19</td></tr>
+<tr><td class="lead">CHTR</td><td class="what"><span class="badge out">trim long</span></td><td>-1</td><td>$113.32</td><td>$113.32</td><td>1.00</td><td>+26</td></tr>
+<tr><td class="lead">SIRI</td><td class="what"><span class="badge out">trim short</span></td><td>+3</td><td>$30.24</td><td>$90.72</td><td>0.92</td><td>-102</td></tr>
+<tr><td class="lead">ORLY</td><td class="what"><span class="badge in">add long</span></td><td>+1</td><td>$90.70</td><td>$90.70</td><td>0.91</td><td>+34</td></tr>
+<tr><td class="lead">DOCU</td><td class="what"><span class="badge in">add short</span></td><td>-1</td><td>$79.50</td><td>$79.50</td><td>0.80</td><td>-37</td></tr>
+<tr><td class="lead">NFLX</td><td class="what"><span class="badge in">add long</span></td><td>+1</td><td>$62.46</td><td>$62.46</td><td>0.63</td><td>+48</td></tr>
+<tr><td class="lead">JD</td><td class="what"><span class="badge rb">trim long &middot; rebalance</span></td><td>-1</td><td>$27.42</td><td>$27.42</td><td>0.28</td><td>+115</td></tr>
+</tbody></table></div></details>
+<details><summary><b>2026-11-02</b><span class="meta">25 fills &middot; $71,144 traded &middot; $25.64 commission</span></summary>
+<div class="scroll"><table><thead><tr><th>Ticker</th><th>What</th><th>Shares</th><th>Price</th><th>Value</th><th>Comm</th><th>Position after</th></tr></thead><tbody>
+<tr><td class="lead">TMUS</td><td class="what"><span class="badge in">long entry</span></td><td>+20</td><td>$154.00</td><td>$3,080.00</td><td>1.00</td><td>+20</td></tr>
+<tr><td class="lead">CHTR</td><td class="what"><span class="badge in">long entry</span></td><td>+27</td><td>$113.00</td><td>$3,051.00</td><td>1.00</td><td>+27</td></tr>
+<tr><td class="lead">SIRI</td><td class="what"><span class="badge in">short entry</span></td><td>-105</td><td>$29.00</td><td>$3,045.00</td><td>1.06</td><td>-105</td></tr>
+<tr><td class="lead">PCAR</td><td class="what"><span class="badge in">long entry</span></td><td>+29</td><td>$105.00</td><td>$3,045.00</td><td>1.00</td><td>+29</td></tr>
+<tr><td class="lead">JD</td><td class="what"><span class="badge in">long entry</span></td><td>+116</td><td>$26.10</td><td>$3,027.60</td><td>1.00</td><td>+116</td></tr>
+<tr><td class="lead">CPRT</td><td class="what"><span class="badge in">long entry</span></td><td>+99</td><td>$30.40</td><td>$3,009.60</td><td>1.00</td><td>+99</td></tr>
+<tr><td class="lead">ORLY</td><td class="what"><span class="badge in">long entry</span></td><td>+33</td><td>$90.56</td><td>$2,988.48</td><td>1.00</td><td>+33</td></tr>
+<tr><td class="lead">PDD</td><td class="what"><span class="badge in">long entry</span></td><td>+37</td><td>$80.50</td><td>$2,978.50</td><td>1.00</td><td>+37</td></tr>
+<tr><td class="lead">PYPL</td><td class="what"><span class="badge in">short entry</span></td><td>-52</td><td>$57.20</td><td>$2,974.40</td><td>1.06</td><td>-52</td></tr>
+<tr><td class="lead">AVGO</td><td class="what"><span class="badge in">long entry</span></td><td>+9</td><td>$329.36</td><td>$2,964.24</td><td>1.00</td><td>+9</td></tr>
+<tr><td class="lead">SWKS</td><td class="what"><span class="badge in">short entry</span></td><td>-34</td><td>$87.00</td><td>$2,958.00</td><td>1.06</td><td>-34</td></tr>
+<tr><td class="lead">DOCU</td><td class="what"><span class="badge in">short entry</span></td><td>-36</td><td>$81.90</td><td>$2,948.40</td><td>1.06</td><td>-36</td></tr>
+<tr><td class="lead">NFLX</td><td class="what"><span class="badge in">long entry</span></td><td>+47</td><td>$62.25</td><td>$2,925.75</td><td>1.00</td><td>+47</td></tr>
+<tr><td class="lead">TTWO</td><td class="what"><span class="badge in">long entry</span></td><td>+15</td><td>$193.00</td><td>$2,895.00</td><td>1.00</td><td>+15</td></tr>
+<tr><td class="lead">GOOGL</td><td class="what"><span class="badge in">long entry</span></td><td>+10</td><td>$283.40</td><td>$2,834.00</td><td>1.00</td><td>+10</td></tr>
+<tr><td class="lead">CRWD</td><td class="what"><span class="badge in">short entry</span></td><td>-11</td><td>$257.20</td><td>$2,829.20</td><td>1.06</td><td>-11</td></tr>
+<tr><td class="lead">GOOG</td><td class="what"><span class="badge in">long entry</span></td><td>+10</td><td>$281.45</td><td>$2,814.50</td><td>1.00</td><td>+10</td></tr>
+<tr><td class="lead">ALGN</td><td class="what"><span class="badge in">short entry</span></td><td>-19</td><td>$147.80</td><td>$2,808.20</td><td>1.06</td><td>-19</td></tr>
+<tr><td class="lead">AMGN</td><td class="what"><span class="badge in">short entry</span></td><td>-6</td><td>$463.50</td><td>$2,781.00</td><td>1.06</td><td>-6</td></tr>
+<tr><td class="lead">BIIB</td><td class="what"><span class="badge in">short entry</span></td><td>-11</td><td>$250.00</td><td>$2,750.00</td><td>1.06</td><td>-11</td></tr>
+<tr><td class="lead">INTU</td><td class="what"><span class="badge in">long entry</span></td><td>+8</td><td>$340.95</td><td>$2,727.60</td><td>1.00</td><td>+8</td></tr>
+<tr><td class="lead">OKTA</td><td class="what"><span class="badge in">short entry</span></td><td>-13</td><td>$208.00</td><td>$2,704.00</td><td>1.06</td><td>-13</td></tr>
+<tr><td class="lead">MU</td><td class="what"><span class="badge in">short entry</span></td><td>-3</td><td>$894.74</td><td>$2,684.22</td><td>1.06</td><td>-3</td></tr>
+<tr><td class="lead">TEAM</td><td class="what"><span class="badge in">short entry</span></td><td>-14</td><td>$191.00</td><td>$2,674.00</td><td>1.06</td><td>-14</td></tr>
+<tr><td class="lead">MELI</td><td class="what"><span class="badge in">long entry</span></td><td>+1</td><td>$1,646.54</td><td>$1,646.54</td><td>1.00</td><td>+1</td></tr>
+</tbody></table></div></details>
+</section>
+<p class="note">Simulated money, Interactive Brokers paper account. Fills, cost basis and unrealised P&amp;L come from the broker. Round trips and the long/short/exit labels are derived from the broker’s execution report, which reconciles exactly to its reported positions.</p>
+</main></body></html>
