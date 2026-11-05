@@ -16,9 +16,13 @@ main{max-width:980px;margin:0 auto;padding:36px max(16px,4vw) 72px}
 .hd{display:flex;flex-direction:column;gap:3px;margin-bottom:26px}
 h1{font-size:1.45rem;margin:0;letter-spacing:-0.02em;text-wrap:balance}
 .sub{font-size:0.8rem;color:var(--muted)}
-.navlink{color:var(--muted);text-decoration:none;
- border-bottom:1px solid var(--line)}
-.navlink:hover{color:var(--fg)}
+.nav{display:flex;gap:6px;margin:12px 0 0;flex-wrap:wrap}
+.nav a{font-size:0.82rem;text-decoration:none;padding:6px 13px;
+ border-radius:999px;border:1px solid var(--line);background:var(--panel);
+ color:var(--muted);white-space:nowrap}
+.nav a:hover{color:var(--fg);border-color:var(--muted)}
+.nav a[aria-current]{background:var(--fg);border-color:var(--fg);
+ color:var(--bg);font-weight:500}
 .stage{font-size:0.82rem;margin:8px 0 0;padding:7px 11px;border-radius:6px;
  display:inline-block}
 .stage.wait{background:var(--grid);color:var(--muted)}
@@ -101,9 +105,6 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
  max-width:64ch}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-.navlink{font-size:0.8rem;color:var(--muted);text-decoration:none;
- border-bottom:1px solid var(--line)}
-.navlink:hover{color:var(--fg)}
 .badge{display:inline-block;font-size:0.68rem;letter-spacing:0.04em;
  padding:2px 7px;border-radius:4px;background:var(--grid);color:var(--muted);
  white-space:nowrap}
@@ -131,7 +132,8 @@ details .scroll{padding:0 4px 4px}
 .tot .v{text-align:right}
 </style></head><body><main>
 <div class="hd"><h1>Trade detail</h1>
-<p class="sub">Updated Thursday 05 November 2026 at 6:40 AM Pacific &middot; <a class="navlink" href="index.html">back to the brief</a></p>
+<p class="sub">Updated Thursday 05 November 2026 at 1:18 PM Pacific</p>
+<nav class="nav"><a href="index.html">&larr; Overview</a><a href="trades.html" aria-current="page">Every trade</a></nav>
 </div>
 <section><h2>Open positions <span class="n">28</span></h2>
 <p class="note">Cost basis and unrealised P&amp;L are Interactive Brokers’ own figures, not this program’s. Held counts the sessions since the position last left zero.</p>
