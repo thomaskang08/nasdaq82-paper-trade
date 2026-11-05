@@ -27,6 +27,7 @@ h1{font-size:1.45rem;margin:0;letter-spacing:-0.02em;text-wrap:balance}
  display:inline-block}
 .stage.wait{background:var(--grid);color:var(--muted)}
 .stage.done{background:var(--grid);color:var(--up);font-weight:500}
+.stage.none{background:var(--grid);color:var(--down);font-weight:500}
 h2{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.09em;
  color:var(--muted);margin:0 0 10px;font-weight:600}
 section{margin-bottom:34px}
@@ -106,9 +107,9 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 <div class="hd"><h1>NASDAQ-82 Paper Trade</h1>
-<p class="sub">Updated Thursday 05 November 2026 at 1:18 PM Pacific</p>
+<p class="sub">Updated Thursday 05 November 2026 at 2:03 PM Pacific</p>
 <nav class="nav"><a href="index.html" aria-current="page">Overview</a><a href="trades.html">Every trade &rarr;</a></nav>
-<p class="stage done">Today's orders filled at the opening auction. Positions below are what the broker holds now.</p>
+<p class="stage none">Today's orders did not fill. They were opening-auction orders, so they were cancelled rather than left resting; the book below is unchanged from yesterday.</p>
 </div>
 <section><h2>Account value</h2>
 <div class="chart"><svg viewBox="0 0 920 260" role="img" aria-label="Account value over 3 trading sessions"><line x1="62" y1="230.0" x2="906" y2="230.0" stroke="var(--grid)" stroke-width="1"/><text x="53" y="230.0" dy="0.33em" text-anchor="end" fill="var(--muted)" font-size="10">$99,370</text><line x1="62" y1="158.0" x2="906" y2="158.0" stroke="var(--grid)" stroke-width="1"/><text x="53" y="158.0" dy="0.33em" text-anchor="end" fill="var(--muted)" font-size="10">$100,464</text><line x1="62" y1="86.0" x2="906" y2="86.0" stroke="var(--grid)" stroke-width="1"/><text x="53" y="86.0" dy="0.33em" text-anchor="end" fill="var(--muted)" font-size="10">$101,557</text><line x1="62" y1="14.0" x2="906" y2="14.0" stroke="var(--grid)" stroke-width="1"/><text x="53" y="14.0" dy="0.33em" text-anchor="end" fill="var(--muted)" font-size="10">$102,650</text><text x="62.0" y="251" text-anchor="start" fill="var(--muted)" font-size="10">2026-11-02</text><text x="906.0" y="251" text-anchor="end" fill="var(--muted)" font-size="10">2026-11-04</text><polyline points="62.0,201.4 484.0,129.1 906.0,203.5" fill="none" stroke="var(--ours)" stroke-width="2" stroke-linejoin="round"/><circle cx="906.0" cy="203.5" r="4" fill="var(--ours)" stroke="var(--panel)" stroke-width="2"/><polyline points="62.0,209.1 484.0,142.8 906.0,98.9 1328.0,34.9" fill="none" stroke="var(--broker)" stroke-width="2" stroke-linejoin="round" stroke-dasharray="4 3"/><circle cx="1328.0" cy="34.9" r="4" fill="var(--broker)" stroke="var(--panel)" stroke-width="2"/></svg><p class="legend"><span><i style="background:var(--ours)"></i>Strategy accounting</span><span><i style="background:var(--broker)"></i>Interactive Brokers</span></p></div></section>
@@ -161,7 +162,7 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
 <tr><td>MELI</td><td class="buy">Long</td><td>1</td><td>$1,610.04</td><td>$1,610.04</td><td>1.57%</td><td class="sell">-$37.50</td></tr>
 </tbody></table></div></div>
 </section>
-<section><h2>Orders filled at today's open <span class="n">15 buy / 9 sell</span></h2>
+<section><h2>Orders for the next open <span class="n">15 buy / 9 sell</span></h2>
 <div class="block">
 <p class="note">Click any row to see that name's price chart. Decided from the 2026-11-04 close and filled at the next opening auction. Both forecast models agreed on 56 names; the strength filter removed 32. Strength is the weaker of the two gaps, and must clear 10% to buy or 20% to sell. The decision was hashed (<code>7d44751b863f6648</code>) before the opening price existed.</p>
 <div class="scroll"><table><thead><tr><th>Ticker</th><th>Order</th><th>Open</th><th>Gap at open</th><th>Gap at close</th><th>Strength</th></tr></thead><tbody>
@@ -191,7 +192,7 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
 <tr data-t="ORLY" data-open="91.73" data-fc="101.45" data-side="Buy" class="row-chart" tabindex="0"><td>ORLY</td><td class="buy">Buy</td><td>$91.73</td><td>+10.6%</td><td>+10.4%</td><td>10.4%</td></tr>
 </tbody></table></div></div>
 </section>
-<footer>Simulated money in an Interactive Brokers paper account, starting from $100,000. The book is sized by the largest factor that keeps it inside its gross, net and 3% position limits, and it is charged 3 bps commission, 20 bps slippage and 3% annual short financing. 
+<footer>Simulated money in an Interactive Brokers paper account, starting from $100,000. The book is sized by the largest factor that keeps it inside its gross, net and 3% position limits, and it is charged commission at 3 bps with a $1.00 per-order minimum, 20 bps slippage and 3% annual short financing. 
 3 sessions have run, which is not enough to judge anything; past 60 these figures start to mean something.
 </footer>
 <div id="ov" hidden><div id="box" role="dialog" aria-modal="true" aria-labelledby="ovt"><div id="ovhd"><h3 id="ovt">-</h3><button id="ovx" aria-label="Close chart">Close</button></div><div id="ovc"></div><p id="ovn"></p></div></div>
