@@ -52,6 +52,8 @@ dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:5px 14px;
 dt{color:var(--muted)}dd{margin:0;text-align:right}
 h2 .n{font-weight:400;text-transform:none;letter-spacing:0;
  color:var(--muted);font-size:0.76rem}
+h2 .n a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+h2 .n a:hover{color:var(--fg)}
 .card.lead .big{font-size:2.6rem;margin-bottom:4px}
 .card.lead .src{font-size:0.82rem;margin-bottom:12px;max-width:60ch}
 .recon{font-size:0.8rem;margin:0 0 14px;padding:7px 11px;border-radius:6px;
@@ -83,9 +85,22 @@ td:first-child{font-weight:600}
 tbody tr:last-child td{border-bottom:none}
 .buy{color:var(--up)}
 .sell{color:var(--down)}
-.eff{display:inline-block;padding:1px 7px;border-radius:999px;font-size:0.72rem;
- border:1px solid currentColor;white-space:nowrap}
-.eff.keep{color:var(--muted);border-color:var(--line)}
+td.lead{text-align:left;font-weight:600}
+td.what{text-align:left}
+/* One tag for "what this does to the position", shared by the brief's order
+   table and the trade log's fill list. Colour is the side the position ENDS on
+   -- long green, short red, flat grey -- never the broker's order direction,
+   which inverts on a close and made the two tables contradict each other.
+   A row that places no order gets the outline variant, so colour stays a
+   reliable marker for something actually trading. */
+.badge{display:inline-block;font-size:0.68rem;letter-spacing:0.04em;
+ padding:2px 7px;border-radius:4px;background:var(--grid);color:var(--muted);
+ white-space:nowrap}
+.badge.long{color:var(--up);font-weight:600}
+.badge.short{color:var(--down);font-weight:600}
+.badge.flat{color:var(--muted);font-weight:600}
+.badge.idle{background:none;border:1px solid var(--line)}
+.badge.rb{font-style:italic}
 .empty{padding:26px 4px;text-align:center;color:var(--muted);font-size:0.86rem}
 footer{border-top:1px solid var(--line);padding-top:16px;font-size:0.78rem;
  line-height:1.65;color:var(--muted);max-width:70ch;margin-top:34px}
@@ -110,7 +125,7 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 <div class="hd"><h1>NASDAQ-82 Paper Trade</h1>
-<p class="sub">Updated Wednesday 11 November 2026 at 11:49 AM Pacific</p>
+<p class="sub">Updated Wednesday 11 November 2026 at 11:59 AM Pacific</p>
 <nav class="nav"><a href="index.html" aria-current="page">Overview</a><a href="trades.html">Every trade &rarr;</a></nav>
 <p class="stage done">Today's orders filled at the opening auction. Positions below are what the broker holds now.</p>
 </div>
@@ -167,13 +182,13 @@ tr.row-chart:focus-visible{outline:2px solid var(--ours);outline-offset:-2px}
 <tr data-t="INTU" data-open="336.96" data-fc="454.35" data-side="Long" class="row-chart" tabindex="0"><td>INTU</td><td class="buy">Long</td><td>8</td><td>$338.81</td><td>$2,710.45</td><td>2.64%</td><td class="sell">-$18.15</td></tr>
 </tbody></table></div></div>
 </section>
-<section><h2>Orders filled at today's open <span class="n">3 orders &mdash; 1 open, 1 close, 1 add</span></h2>
+<section><h2>Orders filled at today's open <span class="n">3 orders &mdash; 1 opened, 1 closed, 1 increased &middot; the next session's orders appear here after 2:20 PM Pacific</span></h2>
 <div class="block">
-<p class="note">Click any row to see that name's price chart. Decided from the 2026-11-10 close and filled at the next opening auction. Both forecast models agreed on 64 names; the strength filter removed 33. Strength is the weaker of the two gaps, and must clear 10% to buy or 20% to sell. Open starts a position, Close sells one out, Add and Trim resize one. The decision was hashed (<code>36d9508b32ead16b</code>) before the opening price existed.</p>
-<div class="scroll"><table><thead><tr><th>Ticker</th><th>Order</th><th>Effect</th><th>Shares</th><th>Open</th><th>Gap at open</th><th>Gap at close</th><th>Strength</th></tr></thead><tbody>
-<tr data-t="ALGN" data-open="171.82" data-fc="80.93" data-side="Sell" class="row-chart" tabindex="0"><td>ALGN</td><td class="sell">Sell</td><td><span class="eff sell">Open</span></td><td>17</td><td>$171.82</td><td>-52.9%</td><td>-53.0%</td><td>52.9%</td></tr>
-<tr data-t="MELI" data-open="1511.83" data-fc="2019.48" data-side="Buy" class="row-chart" tabindex="0"><td>MELI</td><td class="buy">Buy</td><td><span class="eff buy">Add</span></td><td>1</td><td>$1,511.83</td><td>+33.6%</td><td>+33.4%</td><td>33.4%</td></tr>
-<tr data-t="PLTR" data-open="168.20" data-fc="181.93" data-side="Sell" class="row-chart" tabindex="0"><td>PLTR</td><td class="sell">Sell</td><td><span class="eff sell">Close</span></td><td>18</td><td>$168.20</td><td>+8.2%</td><td>+8.9%</td><td>8.2%</td></tr>
+<p class="note">Click any row to see that name's price chart. Decided from the 2026-11-10 close and filled at the next opening auction. Both forecast models agreed on 64 names; the strength filter removed 33. Strength is the weaker of the two gaps, and must clear 10% to buy or 20% to sell. The tag says what each order does to the position, in the same words the trade log uses: green ends up long, red ends up short, grey ends up flat. The decision was hashed (<code>36d9508b32ead16b</code>) before the opening price existed.</p>
+<div class="scroll"><table><thead><tr><th>Ticker</th><th>What</th><th>Shares</th><th>Open</th><th>Gap at open</th><th>Gap at close</th><th>Strength</th></tr></thead><tbody>
+<tr data-t="ALGN" data-open="171.82" data-fc="80.93" data-side="Sell" class="row-chart" tabindex="0"><td class="lead">ALGN</td><td class="what"><span class="badge short">short entry</span></td><td>17</td><td>$171.82</td><td>-52.9%</td><td>-53.0%</td><td>52.9%</td></tr>
+<tr data-t="MELI" data-open="1511.83" data-fc="2019.48" data-side="Buy" class="row-chart" tabindex="0"><td class="lead">MELI</td><td class="what"><span class="badge long">add long</span></td><td>1</td><td>$1,511.83</td><td>+33.6%</td><td>+33.4%</td><td>33.4%</td></tr>
+<tr data-t="PLTR" data-open="168.20" data-fc="181.93" data-side="Sell" class="row-chart" tabindex="0"><td class="lead">PLTR</td><td class="what"><span class="badge flat">close long</span></td><td>18</td><td>$168.20</td><td>+8.2%</td><td>+8.9%</td><td>8.2%</td></tr>
 </tbody></table></div></div>
 </section>
 <footer>Simulated money in an Interactive Brokers paper account, starting from $100,000. The book is sized by the largest factor that keeps it inside its gross, net and 3% position limits, and it is charged commission at 3 bps with a $1.00 per-order minimum, 20 bps slippage and 3% annual short financing. 
